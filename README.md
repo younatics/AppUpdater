@@ -9,6 +9,9 @@
 ![iOS 9.0+](https://img.shields.io/badge/iOS-9.0%2B-blue.svg)
 
 #### ❗️Check your update with one line of code
+| Update available | Update unavailable |
+| :--------------: | :----------: |
+| ![available](https://github.com/younatics/AppUpdater/blob/master/Images/update_on.gif) | ![unavailable](https://github.com/younatics/AppUpdater/blob/master/Images/update_off.gif) |
 
 ## Requirements
 `PowerMode` is written in Swift 4. Compatible with iOS 9.0+
