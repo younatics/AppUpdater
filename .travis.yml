@@ -1,0 +1,5 @@
+language: objective-c
+osx_image: xcode8.3
+cache: cocoapods
+script:
+- xcodebuild -scheme 'AppUpdater' -sdk iphonesimulator CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty -c
