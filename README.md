@@ -17,8 +17,12 @@
 `AppUpdater` is written in Swift 4. Compatible with iOS 9.0+
 
 ## Usage
-`AppUpdater.showUpdateAlert()` or use `AppUpdater.showUpdateAlert(isForce: true)` if you want force update. 
+```Swift
+AppUpdater.showUpdateAlert()
 
+// force update.
+AppUpdater.showUpdateAlert(isForce: true)
+```
 You can also use some methods listed below
 
 #### Methods
