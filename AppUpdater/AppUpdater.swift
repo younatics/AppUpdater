@@ -52,19 +52,19 @@ public class AppUpdater: NSObject {
         var alert: UIAlertController?
         
         if compare(appstoreVersion: data.version) {
-            alert = UIAlertController(title: applicationName, message: "Version \(data.version) is available on the AppStore", preferredStyle: UIAlertControllerStyle.alert)
-            alert?.addAction(UIAlertAction(title: "Update", style: UIAlertActionStyle.destructive, handler: { action in
+            alert = UIAlertController(title: applicationName, message: "Version \(data.version) is available on the AppStore", preferredStyle: UIAlertController.Style.alert)
+            alert?.addAction(UIAlertAction(title: "Update", style: UIAlertAction.Style.destructive, handler: { action in
                 guard let url = URL(string: data.downloadUrl) else { return }
                 UIApplication.shared.openURL(url)
             }))
             
             if !isForce {
-                alert?.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+                alert?.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
             }
         } else {
             if !isForce {
-                alert = UIAlertController(title: applicationName, message: "Version \(data.version) is the latest version on the AppStore", preferredStyle: UIAlertControllerStyle.alert)
-                alert?.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+                alert = UIAlertController(title: applicationName, message: "Version \(data.version) is the latest version on the AppStore", preferredStyle: UIAlertController.Style.alert)
+                alert?.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
             }
         }
         
