@@ -46,25 +46,33 @@ public class AppUpdater: NSObject {
         }
     }
     
-    public class func showUpdateAlert(isForce:Bool = false) {
+    public class func showUpdateAlert(isForce:Bool = false,
+                                      title: String = "Update",
+                                      message: String? = nil,
+                                      cancel: String = "Cancel",
+                                      ok: String = "OK") {
         guard let applicationName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String, let data = versionAndDownloadUrl() else { return }
         
         var alert: UIAlertController?
         
         if compare(data.version) {
-            alert = UIAlertController(title: applicationName, message: "Version \(data.version) is available on the AppStore", preferredStyle: UIAlertController.Style.alert)
-            alert?.addAction(UIAlertAction(title: "Update", style: UIAlertAction.Style.destructive, handler: { action in
+            if let message = message {
+                alert = UIAlertController(title: applicationName, message: message, preferredStyle: UIAlertController.Style.alert)
+            } else {
+                alert = UIAlertController(title: applicationName, message: "Version \(data.version) is available on the AppStore", preferredStyle: UIAlertController.Style.alert)
+            }
+            alert?.addAction(UIAlertAction(title: title, style: UIAlertAction.Style.destructive, handler: { action in
                 guard let url = URL(string: data.downloadUrl) else { return }
                 UIApplication.shared.openURL(url)
             }))
             
             if !isForce {
-                alert?.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                alert?.addAction(UIAlertAction(title: cancel, style: UIAlertAction.Style.cancel, handler: nil))
             }
         } else {
             if !isForce {
                 alert = UIAlertController(title: applicationName, message: "Version \(data.version) is the latest version on the AppStore", preferredStyle: UIAlertController.Style.alert)
-                alert?.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+                alert?.addAction(UIAlertAction(title: ok, style: UIAlertAction.Style.cancel, handler: nil))
             }
         }
         
