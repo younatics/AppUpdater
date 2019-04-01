@@ -31,12 +31,12 @@ public class AppUpdater: NSObject {
     
     public class func isUpdateAvailable() -> Bool {
         guard let data = versionAndDownloadUrl() else { return false }
-        let appStoreVewsion = data.version
+        let appStoreVersion = data.version
         
-        return compare(appstoreVersion: appStoreVewsion)
+        return compare(appStoreVersion)
     }
     
-    private class func compare(appstoreVersion: String) -> Bool {
+    private class func compare(_ appstoreVersion: String) -> Bool {
         guard let deviceVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else { return false }
         
         if appstoreVersion.compare(deviceVersion, options: .numeric) == .orderedDescending {
@@ -51,7 +51,7 @@ public class AppUpdater: NSObject {
         
         var alert: UIAlertController?
         
-        if compare(appstoreVersion: data.version) {
+        if compare(data.version) {
             alert = UIAlertController(title: applicationName, message: "Version \(data.version) is available on the AppStore", preferredStyle: UIAlertController.Style.alert)
             alert?.addAction(UIAlertAction(title: "Update", style: UIAlertAction.Style.destructive, handler: { action in
                 guard let url = URL(string: data.downloadUrl) else { return }
