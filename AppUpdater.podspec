@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AppUpdater'
-  s.version          = '1.0.2'
-  s.summary          = 'AppUpdater in iOS!'
+  s.version          = '2.0.0'
+  s.summary          = 'AppUpdater in iOS! (Swift 6)'
 
   s.description = <<-DESCRIPTION
   AppUpdater in iOS! Use AppUpdater!!
@@ -27,7 +27,8 @@ Pod::Spec.new do |s|
     :tag => s.version.to_s }
 
   s.source_files     = 'AppUpdater/*.swift'
-  s.ios.deployment_target = '9.0'
+  s.swift_version = '6.0'
+  s.ios.deployment_target = '13.0'
 
   s.frameworks = 'UIKit'
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }

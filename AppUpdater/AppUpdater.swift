@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class AppUpdater: NSObject {
+@MainActor public class AppUpdater: NSObject {
     public static let shared = AppUpdater()
     
     public class func versionAndDownloadUrl() -> (version: String, downloadUrl: String)? {
@@ -17,8 +17,8 @@ public class AppUpdater: NSObject {
         
         guard
             let data = try? Data(contentsOf: url),
-            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
-            let results = json?["results"] as? [[String: Any]],
+            let json = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String: Any],
+            let results = json["results"] as? [[String: Any]],
             results.count > 0,
             let version = results[0]["version"] as? String,
             let downLoadUrl = results[0]["trackViewUrl"] as? String
@@ -38,12 +38,13 @@ public class AppUpdater: NSObject {
     
     private class func compare(_ appstoreVersion: String) -> Bool {
         guard let deviceVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else { return false }
-        
-        if appstoreVersion.compare(deviceVersion, options: .numeric) == .orderedDescending {
-            return true
-        } else {
-            return false
-        }
+        return isNewer(appStoreVersion: appstoreVersion, than: deviceVersion)
+    }
+
+    /// Pure, dependency-free version comparison (App Store version is newer than
+    /// the installed one), using numeric ordering so 1.10 > 1.9.
+    class func isNewer(appStoreVersion: String, than installedVersion: String) -> Bool {
+        return appStoreVersion.compare(installedVersion, options: .numeric) == .orderedDescending
     }
     
     public class func showUpdateAlert(isForce:Bool = false,
@@ -63,7 +64,7 @@ public class AppUpdater: NSObject {
             }
             alert?.addAction(UIAlertAction(title: title, style: UIAlertAction.Style.destructive, handler: { action in
                 guard let url = URL(string: data.downloadUrl) else { return }
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }))
             
             if !isForce {
@@ -77,9 +78,11 @@ public class AppUpdater: NSObject {
         }
         
         guard let _alert = alert else { return }
-        UIApplication.shared.keyWindow?.rootViewController?.present(_alert, animated: true, completion: {
-            
-        })
+        let keyWindow = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow }
+        keyWindow?.rootViewController?.present(_alert, animated: true)
     }
 }
 
