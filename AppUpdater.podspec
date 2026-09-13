@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AppUpdater'
-  s.version          = '2.0.0'
+  s.version          = '2.0.1'
   s.summary          = 'AppUpdater in iOS! (Swift 6)'
 
   s.description = <<-DESCRIPTION
