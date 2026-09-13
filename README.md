@@ -1,12 +1,10 @@
 # AppUpdater 
 
-[![Version](https://img.shields.io/cocoapods/v/AppUpdater.svg?style=flat)](http://cocoapods.org/pods/AppUpdater)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/younatics/AppUpdater/blob/master/LICENSE)
-[![Platform](https://img.shields.io/cocoapods/p/AppUpdater.svg?style=flat)](http://cocoapods.org/pods/AppUpdater)
-[![Build Status](https://travis-ci.org/younatics/AppUpdater.svg?branch=master)](https://travis-ci.org/younatics/AppUpdater)
+[![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen.svg?style=flat)](https://swift.org/package-manager/)
+[![CocoaPods](https://img.shields.io/cocoapods/v/AppUpdater.svg?style=flat)](https://cocoapods.org/pods/AppUpdater)
+[![Platform](https://img.shields.io/badge/iOS-13.0%2B-blue.svg?style=flat)](https://developer.apple.com/ios/)
 [![Swift 6.0](https://img.shields.io/badge/Swift-6.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
-![iOS 13.0+](https://img.shields.io/badge/iOS-13.0%2B-blue.svg)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/younatics/AppUpdater/blob/master/LICENSE)
 
 #### ❗️Check your update with one line of code
 | Update available | Update unavailable |
@@ -14,7 +12,7 @@
 | ![available](https://github.com/younatics/AppUpdater/blob/master/Images/update_on.gif) | ![unavailable](https://github.com/younatics/AppUpdater/blob/master/Images/update_off.gif) |
 
 ## Requirements
-`AppUpdater` is written in Swift 6. Compatible with iOS 13.0+. Supports Swift Package Manager, CocoaPods, and Carthage.
+`AppUpdater` uses Swift tools 6.0 and Swift 6. Compatible with iOS 13.0+. Supports Swift Package Manager and CocoaPods.
 
 ## Usage
 ```Swift
@@ -29,7 +27,7 @@ You can also use some methods listed below
 
 | Function | Parameter | Return |
 | -------- | --------- | ------ |
-| `showUpdateAlert` | `isForce` | - |
+| `showUpdateAlert` | `isForce`, `title`, `message`, `cancel`, `ok` | - |
 | `isUpdateAvailable` | - | `Bool` |
 | `versionAndDownloadUrl` | - | `(version: String, downloadUrl: String)?` |
 
@@ -45,13 +43,9 @@ dependencies: [
     .package(url: "https://github.com/younatics/AppUpdater.git", from: "2.0.0")
 ]
 ```
-### Cocoapods
+### CocoaPods
 ```ruby
-pod 'AppUpdater'
-```
-### Carthage
-```
-github "younatics/AppUpdater"
+pod 'AppUpdater', '~> 2.0'
 ```
 
 ## References
