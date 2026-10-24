@@ -12,7 +12,7 @@
 | ![available](https://github.com/younatics/AppUpdater/blob/master/Images/update_on.gif) | ![unavailable](https://github.com/younatics/AppUpdater/blob/master/Images/update_off.gif) |
 
 ## Requirements
-`AppUpdater` uses Swift tools 6.0 and Swift 6. Compatible with iOS 13.0+. Supports Swift Package Manager and CocoaPods.
+`AppUpdater` uses Swift tools 6.0 and Swift 6. Compatible with iOS 15.0+. Supports Swift Package Manager and CocoaPods.
 
 ## Usage
 ```Swift
